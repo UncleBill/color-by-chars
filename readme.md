@@ -1,6 +1,6 @@
 # color-by-chars
 
-Generate color by characters. Mostly different characters, different colors.
+Generate color by characters. Mostly different characters, different colors. [examples](https://unclebill.github.io/color-by-chars)
 
 ## Usage
 
