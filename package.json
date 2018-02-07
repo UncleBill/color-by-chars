@@ -1,0 +1,28 @@
+{
+  "name": "color-by-chars",
+  "version": "0.0.1",
+  "description": "Generate color by characters.",
+  "main": "color-by-chars.js",
+  "module": "color-by-chars.esm.js",
+  "jsnext:main": "color-by-chars.esm.js",
+  "scripts": {
+    "test": "node test.js",
+    "build": "rollup -c rollup.conf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unclebill/color-by-chars.git"
+  },
+  "keywords": [
+    "color"
+  ],
+  "author": "unclebill",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/unclebill/color-by-chars/issues"
+  },
+  "homepage": "https://github.com/unclebill/color-by-chars#readme",
+  "devDependencies": {
+    "rollup": "^0.55.3"
+  }
+}

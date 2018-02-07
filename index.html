@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>colorByChars</title>
+    <style>
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+      ul li {
+        height: 30px;
+        line-height: 30px;
+        padding: 0 10px;
+        list-style-type: none;
+        margin: 0;
+        transition: all 0.2s ease;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="examples" @submit.prevent='add'>
+      <ul>
+        <li v-for='chars in examples' :style='calcStyle(chars)'>{{chars}}</li>
+      </ul>
+      <p>
+        <label>
+          color offset: {{offset}}
+          <br>
+          <input type="range" step='1' max='10000' v-model='offset' name="offset">
+        </label>
+      </p>
+      <p>
+        <input type="text" v-model='newchars' placeholder="try chars" autofocus>
+        <input type="submit" value='add'>
+      </p>
+    </form>
+    <a class="code" href="https://github.com/unclebill/color-by-chars"></a>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+    <script src='color-by-chars.js'></script>
+    <script type="text/javascript">
+      new Vue({
+        el: '#examples',
+        data: {
+          newchars: '',
+          offset: 1,
+          examples: [
+            'Hi',
+            'Hello World！',
+            'Brendan Eich',
+            'IceFrog',
+            '举杯邀明月，对应成三人', // Chinese poetry
+            '孙悟空', // Chinese myth character
+            new Date().toISOString()
+          ]
+        },
+        methods: {
+          add: function () {
+            this.examples.push(this.newchars)
+            this.newchars = ''
+          },
+          calcStyle: function (chars) {
+            let [red, green, blue] = colorByChars(chars, this.offset)
+            let gray = red * 0.3 +  green * 0.59 +  blue * 0.11;
+            var inverse = gray > 128 ? '#333' : 'white';
+            console.log(`%c${chars}`, `background-color: rgb(${red}, ${green}, ${blue}); color: ${inverse}`);
+            return {
+              'background-color': `rgb(${red}, ${green}, ${blue}`,
+              'color': inverse
+            }
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
