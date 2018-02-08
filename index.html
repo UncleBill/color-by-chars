@@ -21,7 +21,7 @@
   <body>
     <form id="examples" @submit.prevent='add'>
       <ul>
-        <li v-for='chars in examples' :style='calcStyle(chars)'>{{chars}}</li>
+        <li v-for='chars in examples' :style='colorize(chars)'>{{chars}}</li>
       </ul>
       <p>
         <label>
@@ -49,17 +49,17 @@
             'Hello World！',
             'Brendan Eich',
             'IceFrog',
-            '举杯邀明月，对应成三人', // Chinese poetry
+            '举杯邀明月，对影成三人', // Chinese poetry
             '孙悟空', // Chinese myth character
             new Date().toISOString()
           ]
         },
         methods: {
-          add: function () {
+          add () {
             this.examples.push(this.newchars)
             this.newchars = ''
           },
-          calcStyle: function (chars) {
+          colorize (chars) {
             let [red, green, blue] = colorByChars(chars, this.offset)
             let gray = red * 0.3 +  green * 0.59 +  blue * 0.11;
             var inverse = gray > 128 ? '#333' : 'white';
@@ -69,6 +69,11 @@
               'color': inverse
             }
           }
+        },
+        created () {
+          setInterval(() => {
+            this.examples.splice(6, 1, new Date().toISOString())
+          }, 1000)
         }
       })
     </script>

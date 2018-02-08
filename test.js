@@ -5,7 +5,7 @@ const examples = [
   'Hello World',
   'Brendan Eich',
   'IceFrog',
-  '举杯邀明月，对应成三人', // Chinese poetry
+  '举杯邀明月，对影成三人', // Chinese poetry
   '孙悟空' // Chinese myth character
 ]
 examples.forEach(chars => {
