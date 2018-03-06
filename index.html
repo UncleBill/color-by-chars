@@ -2,41 +2,56 @@
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <title>colorByChars</title>
+    <title>Generate color by characters</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css" />
     <style>
+      [v-cloak] {
+        display: none;
+      }
+      body {
+        transition: all 0.1s ease;
+        padding: 10px;
+      }
       ul {
         margin: 0;
         padding: 0;
       }
       ul li {
-        height: 30px;
-        line-height: 30px;
+        height: 35px;
+        line-height: 35px;
         padding: 0 10px;
         list-style-type: none;
         margin: 0;
         transition: all 0.2s ease;
       }
+      input[type=range] {
+        width: 50%;
+      }
       .source-link {
         font-size: 18px;
         line-height: 25px;
       }
+      input[type=text] {
+        color: #333;
+      }
     </style>
   </head>
   <body>
-    <form id="examples" @submit.prevent='add'>
+    <form id="examples" class='pure-form' @submit.prevent='add' v-cloak>
       <ul>
         <li v-for='chars in examples' :style='colorize(chars)'>{{chars}}</li>
       </ul>
       <p>
         <label>
-          color offset: {{offset}}
+          offset: {{offset}} {{offset === 1 ? '(default)' : ''}}
           <br>
           <input type="range" step='1' max='10000' v-model='offset' name="offset">
         </label>
       </p>
       <p>
-        <input type="text" v-model='newchars' placeholder="try chars" autofocus>
-        <input type="submit" value='add'>
+        <input type="text" v-model.trim='newchars' placeholder="try chars" autofocus>
+        <input type="submit" value='add' class='pure-button pure-button-primary'>
+        {{newchars ? colorize(newchars)['background-color'] : ''}}
       </p>
     </form>
     <hr>
@@ -56,14 +71,29 @@
           newchars: '',
           offset: 1,
           examples: [
-            'Hi',
+            'Rainbow',
             'Hello World！',
             'Brendan Eich',
             'IceFrog',
-            '举杯邀明月，对影成三人', // Chinese poetry
-            '孙悟空', // Chinese myth character
+            '赤橙黄绿青蓝紫，谁持彩虹当空舞', // Chinese poetry
+            '孙悟空', // A Chinese myth character
             new Date().toISOString()
           ]
+        },
+        computed: {
+          bodyStyle () {
+            return this.newchars !== '' ? this.colorize(this.newchars) : null
+          }
+        },
+        watch: {
+          bodyStyle (newval) {
+            if (newval) {
+              document.body.style.backgroundColor = newval['background-color']
+              document.body.style.color = newval['color']
+            } else {
+              document.body.style = null
+            }
+          }
         },
         methods: {
           add () {
@@ -76,7 +106,7 @@
             var inverse = gray > 128 ? '#333' : 'white';
             console.log(`%c${chars}`, `background-color: rgb(${red}, ${green}, ${blue}); color: ${inverse}`);
             return {
-              'background-color': `rgb(${red}, ${green}, ${blue}`,
+              'background-color': `rgb(${red}, ${green}, ${blue})`,
               'color': inverse
             }
           }

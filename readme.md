@@ -30,6 +30,9 @@ console.log(colorByChars('Hello World!'))
 </script>
 ```
 
+## How
+Calculate the product by all charCode's of every character, then map it to color space.
+
 ## License
 
 MIT
