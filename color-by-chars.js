@@ -12,8 +12,8 @@
  * @returns Number[] - [RED, GREEN, BLUE]
  */
 function colorByChars (chars, base) {
-  let remainder = base || 1;
-  for (let i = 0; i < chars.length; ++i) {
+  var remainder = base || 1;
+  for (var i = 0; i < chars.length; ++i) {
     remainder *= chars.charCodeAt(i);
     // a number will lose its precision when it's too big
     remainder &= 0xffffff;
@@ -21,9 +21,9 @@ function colorByChars (chars, base) {
       remainder = 1;
     }
   }
-  let red = remainder >> 16 & 0xff;
-  let green = remainder >> 8 & 0xff;
-  let blue = remainder & 0xff;
+  var red = remainder >> 16 & 0xff;
+  var green = remainder >> 8 & 0xff;
+  var blue = remainder & 0xff;
 
   return [red, green, blue]
 }
