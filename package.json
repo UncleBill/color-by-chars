@@ -1,6 +1,6 @@
 {
   "name": "color-by-chars",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Generate color by characters.",
   "main": "color-by-chars.js",
   "module": "color-by-chars.esm.js",
