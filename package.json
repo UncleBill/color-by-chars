@@ -23,6 +23,6 @@
   },
   "homepage": "https://github.com/unclebill/color-by-chars#readme",
   "devDependencies": {
-    "rollup": "^0.55.3"
+    "rollup": "^2.79.2"
   }
 }
